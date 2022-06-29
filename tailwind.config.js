@@ -5,7 +5,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   presets: [],
-  darkMode: 'media', // or 'class'
+  darkMode: 'class', // or 'class'
   theme: {
     screens: {
       sm: '640px',
@@ -355,6 +355,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        'Inter var',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',

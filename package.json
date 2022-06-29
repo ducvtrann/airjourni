@@ -15,8 +15,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.5",
+    "@heroicons/react": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "next": "12.2.0",
+    "next-themes": "^0.2.0",
+    "nodemailer": "^6.7.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
