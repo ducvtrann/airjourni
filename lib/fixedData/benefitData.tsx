@@ -2,9 +2,9 @@ import {
   ChatIcon,
   CashIcon,
   PhotographIcon,
-  DeviceMobileIcon,
-  AdjustmentsIcon,
-  SunIcon,
+  CalendarIcon,
+  MapIcon,
+  ShareIcon,
 } from '@heroicons/react/outline';
 
 import benefitOneImg from '../../public/images/photo-friends.png';
@@ -44,17 +44,17 @@ const benefitTwo = {
     {
       title: 'Calendar View Planning',
       desc: 'Drag and drop your favorite events onto the calendar for an organize view of your itinerary.',
-      icon: <DeviceMobileIcon />,
+      icon: <CalendarIcon />,
     },
     {
       title: 'Map View Planning',
       desc: 'Use our app to review your planned attractions while getting information about the time and distance between attractions.',
-      icon: <AdjustmentsIcon />,
+      icon: <MapIcon />,
     },
     {
       title: 'Share your trip',
       desc: 'Did you find hidden gems on your journeys? Let your fellow travelers know where. Get inspired from guides by people like yourself',
-      icon: <SunIcon />,
+      icon: <ShareIcon />,
     },
   ],
 };
