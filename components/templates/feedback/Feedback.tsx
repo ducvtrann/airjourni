@@ -47,7 +47,7 @@ const Feedback: React.FC<IFeedback> = ({ align }) => {
       }`}
     >
       <SectionTitle
-        title="Suggestion"
+        title="Suggestions"
         subTitle="Let's know how we can improve your planning experience"
       />
       <form
