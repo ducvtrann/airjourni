@@ -17,7 +17,7 @@ const LEGAL = [
 ];
 
 // Component
-import BaseContainer from '../baseContainer/BaseContainer';
+import BaseContainer from './BaseContainer';
 
 // Main Component
 const Footer: React.FC = () => {

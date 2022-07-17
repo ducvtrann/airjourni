@@ -3,8 +3,8 @@ import { FormEvent, useState } from 'react';
 import axios from 'axios';
 
 // Component
-import BaseContainer from '../baseContainer/BaseContainer';
-import SectionTitle from '../sectionTitle/SectionTitle';
+import BaseContainer from './BaseContainer';
+import SectionTitle from './SectionTitle';
 
 // Interface
 export interface IFeedback {

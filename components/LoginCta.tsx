@@ -2,7 +2,7 @@
 import Link from 'next/link';
 
 // Component
-import BaseContainer from '../baseContainer/BaseContainer';
+import BaseContainer from './BaseContainer';
 
 // Main Component
 const LoginCta: React.FC = () => {

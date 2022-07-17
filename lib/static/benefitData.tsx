@@ -7,8 +7,8 @@ import {
   ShareIcon,
 } from '@heroicons/react/outline';
 
-import benefitOneImg from '../../public/images/photo-friends.png';
-import benefitTwoImg from '../../public/images/surf-friends.png';
+import benefitOneImg from 'public/images/photo-friends.png';
+import benefitTwoImg from 'public/images/surf-friends.png';
 
 const benefitOne = {
   title: 'Memorable and easier trips every time!',

@@ -1,35 +1,52 @@
 // Package
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useAuth } from '../lib/context/auth.context';
+import { useEffect } from 'react';
 
 // Data
-import { benefitOne, benefitTwo } from '../lib/fixedData/benefitData';
+import { benefitOne, benefitTwo } from '../lib/static/benefitData';
 
 // Component
-import Navbar from '../components/templates/navbar/Navbar';
-import Hero from '../components/templates/hero/Hero';
-import Benefit from '../components/templates/benefit/Benefit';
-import LoginCta from '../components/templates/cta/LoginCta';
-import Feedback from '../components/templates/feedback/Feedback';
-import Footer from '../components/templates/footer/Footer';
-import SectionTitle from '../components/templates/sectionTitle/SectionTitle';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import Benefit from '../components/Benefit';
+import LoginCta from '../components/LoginCta';
+import Feedback from '../components/Feedback';
+import Footer from '../components/Footer';
+import SectionTitle from '../components/SectionTitle';
+import Spinner from '../components/Spinner';
 
 // Main Component
 const Home: NextPage = () => {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <SectionTitle
-        title="Features"
-        subTitle="For every trip and every destination - one set of tools"
-      />
-      <Benefit {...benefitOne} />
-      <Benefit {...benefitTwo} />
-      <LoginCta />
-      <Feedback />
-      <Footer />
-    </>
-  );
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push('/dashboard');
+    }
+  });
+
+  if (!user && !loading) {
+    return (
+      <>
+        <Navbar />
+        <Hero />
+        <SectionTitle
+          title="Features"
+          subTitle="For every trip and every destination - one set of tools"
+        />
+        <Benefit {...benefitOne} />
+        <Benefit {...benefitTwo} />
+        <LoginCta />
+        <Feedback />
+        <Footer />
+      </>
+    );
+  } else {
+    return <Spinner />;
+  }
 };
 
 export default Home;

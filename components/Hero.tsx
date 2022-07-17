@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Image
-import heroImg from '../../../public/images/travel-friends.png';
+import heroImg from 'public/images/travel-friends.png';
 
 // Component
-import BaseContainer from '../baseContainer/BaseContainer';
+import BaseContainer from './BaseContainer';
 
 // Main Component
 const Hero: React.FC = () => {

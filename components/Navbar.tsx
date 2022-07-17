@@ -1,10 +1,22 @@
 // Package
+import ThemeChanger from './DarkSwitch';
 import Link from 'next/link';
 import Image from 'next/image';
-import ThemeChanger from '../darkSwitch/DarkSwitch';
+import { useAuth } from '../lib/context/auth.context';
+import { authSignOut } from '../lib/firebase/authentication';
 
 // Main Component
 const Navbar: React.FC = () => {
+  const { user } = useAuth();
+
+  const logOut = async () => {
+    try {
+      await authSignOut();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <header className="w-full">
       <nav className="container flex items-center justify-between p-8 mx-auto xl:px-0">
@@ -22,10 +34,22 @@ const Navbar: React.FC = () => {
             <span>AirJourni</span>
           </a>
         </Link>
-        <div className="flex space-x-4">
-          <Link href="/login">
-            <a className="px-2 py-1 text-white bg-blue-600 rounded-md">Login</a>
-          </Link>
+        <div className="flex items-center space-x-4">
+          {user ? (
+            <a
+              className="px-2 py-1 text-white bg-blue-600 rounded-md"
+              onClick={logOut}
+            >
+              Log Out
+            </a>
+          ) : (
+            <Link href="/login">
+              <a className="px-2 py-1 text-white bg-blue-600 rounded-md">
+                Login
+              </a>
+            </Link>
+          )}
+
           <div className="hidden ml-4 sm:block">
             <ThemeChanger />
           </div>

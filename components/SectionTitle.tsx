@@ -1,5 +1,5 @@
 // Component
-import BaseContainer from '../baseContainer/BaseContainer';
+import BaseContainer from './BaseContainer';
 
 // Interface
 export interface ISectionTitle {

@@ -3,9 +3,9 @@
 import type { NextPage } from 'next';
 
 // Component
-import Navbar from '../components/templates/navbar/Navbar';
-import BaseContainer from '../components/templates/baseContainer/BaseContainer';
-import Footer from '../components/templates/footer/Footer';
+import Navbar from '../components/Navbar';
+import BaseContainer from '../components/BaseContainer';
+import Footer from '../components/Footer';
 
 // Main Component
 const Privacy: NextPage = () => {

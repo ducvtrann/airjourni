@@ -3,9 +3,9 @@
 import type { NextPage } from 'next';
 
 // Component
-import BaseContainer from '../components/templates/baseContainer/BaseContainer';
-import Navbar from '../components/templates/navbar/Navbar';
-import Footer from '../components/templates/footer/Footer';
+import BaseContainer from '../components/BaseContainer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 // Main Component
 const Legal: NextPage = () => {

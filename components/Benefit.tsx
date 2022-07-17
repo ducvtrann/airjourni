@@ -1,5 +1,5 @@
 // Package
-import BaseContainer from '../baseContainer/BaseContainer';
+import BaseContainer from './BaseContainer';
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import React from 'react';
