@@ -1,14 +1,12 @@
 // Package
 import Image from 'next/image';
 import Link from 'next/link';
-
-// Image
 import heroImg from 'public/images/travel-friends.png';
 
 // Component
 import BaseContainer from './BaseContainer';
 
-// Main Component
+// Main
 const Hero: React.FC = () => {
   return (
     <BaseContainer className="flex flex-wrap">

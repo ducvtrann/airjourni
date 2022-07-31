@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
-// Main Component
+// Main
 const ThemeChanger: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();

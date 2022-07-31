@@ -1,8 +1,10 @@
 // Package
-import BaseContainer from './BaseContainer';
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import React from 'react';
+
+// Component
+import BaseContainer from './BaseContainer';
 
 // Interface
 export interface IBenefit {
@@ -23,7 +25,7 @@ export interface IBenefitItem {
   icon: JSX.Element;
 }
 
-// Main Component
+// Main
 const Benefit: React.FC<IBenefit> = ({
   title,
   desc,

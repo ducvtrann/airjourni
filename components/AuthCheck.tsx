@@ -7,12 +7,15 @@ import { useAuth } from '../lib/context/auth.context';
 import Spinner from './Spinner';
 import SignIn from './SignIn';
 
+// Interface
 interface IAuthCheck {
   children: React.ReactNode;
 }
 
+// Data
 const redirectRoutes = ['/', '/login'];
 
+// Main
 const AuthCheck: React.FC<IAuthCheck> = ({ children }) => {
   const { user, loading } = useAuth();
   const router = useRouter();

@@ -1,8 +1,11 @@
 // Package
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
 import { useRouter } from 'next/router';
+
+// Component
+import BaseContainer from './BaseContainer';
 
 // Data
 const NAVIGATION = [
@@ -16,10 +19,7 @@ const LEGAL = [
   { visibleName: 'Contact Us', internalName: 'feedback' },
 ];
 
-// Component
-import BaseContainer from './BaseContainer';
-
-// Main Component
+// Main
 const Footer: React.FC = () => {
   const router = useRouter();
   const isHomePage = router.pathname === '/';
@@ -49,8 +49,8 @@ const Footer: React.FC = () => {
             </Link>
           </div>
           <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
-            AirJourni is a company with a mission to remove the hassle of
-            planning and focus more on enjoying the trip.
+            AirJourni was founded with the mission to remove the hassle of
+            planning and focusing on enjoying the trip sooner.
           </div>
         </div>
 

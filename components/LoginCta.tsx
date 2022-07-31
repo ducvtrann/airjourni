@@ -4,7 +4,7 @@ import Link from 'next/link';
 // Component
 import BaseContainer from './BaseContainer';
 
-// Main Component
+// Main
 const LoginCta: React.FC = () => {
   return (
     <BaseContainer className="py-0">

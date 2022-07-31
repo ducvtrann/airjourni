@@ -8,6 +8,8 @@ export interface ISectionTitle {
   description?: string;
   align?: string;
 }
+
+// Main
 const SectionTitle: React.FC<ISectionTitle> = ({
   title,
   subTitle,

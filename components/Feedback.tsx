@@ -11,7 +11,7 @@ export interface IFeedback {
   align?: string;
 }
 
-// Main Component
+// Main
 const Feedback: React.FC<IFeedback> = ({ align }) => {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);

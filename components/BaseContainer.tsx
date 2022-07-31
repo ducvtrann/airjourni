@@ -4,15 +4,13 @@ export interface IBaseContainerTemplate {
   children: React.ReactNode;
 }
 
-// Main Component
+// Main
 const BaseContainer: React.FC<IBaseContainerTemplate> = ({
   className,
   children,
 }) => {
   return (
-    <div
-      className={`container p-8 mx-auto xl:px-0 ${className ? className : ''}`}
-    >
+    <div className={`container p-8 mx-auto ${className ? className : ''}`}>
       {children}
     </div>
   );

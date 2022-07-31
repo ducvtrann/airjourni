@@ -1,25 +1,23 @@
 // Package
-import ThemeChanger from './DarkSwitch';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '../lib/context/auth.context';
 import { authSignOut } from '../lib/firebase/authentication';
+import { useMediaQuery } from 'react-responsive';
 
-// Main Component
+//  Component
+import ThemeChanger from './DarkSwitch';
+
+// Main
 const Navbar: React.FC = () => {
   const { user } = useAuth();
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+  const hideNavbar = user && isMobile;
 
-  const logOut = async () => {
-    try {
-      await authSignOut();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  if (hideNavbar) return <></>;
   return (
     <header className="w-full">
-      <nav className="container flex items-center justify-between p-8 mx-auto xl:px-0">
+      <nav className="container flex items-center justify-between p-8 mx-auto">
         <Link href="/">
           <a className="flex items-center space-x-2 text-2xl font-medium text-blue-600 dark:text-gray-100">
             <span>
@@ -38,7 +36,7 @@ const Navbar: React.FC = () => {
           {user ? (
             <a
               className="px-2 py-1 text-white bg-blue-600 rounded-md"
-              onClick={logOut}
+              onClick={authSignOut}
             >
               Log Out
             </a>

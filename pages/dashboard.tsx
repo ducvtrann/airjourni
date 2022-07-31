@@ -4,15 +4,18 @@ import type { NextPage } from 'next';
 // Component
 import AuthCheck from '../components/AuthCheck';
 import Navbar from '../components/Navbar';
+import DashboardContainer from 'components/dashboard/DashboardContainer';
 
-// Main Component
+// Main
 const Dashboard: NextPage = () => {
   return (
     <>
-      <AuthCheck>
-        <Navbar />
-        <div>This is protected</div>
-      </AuthCheck>
+      <div className="flex flex-col w-screen h-screen overflow-y-hidden">
+        <AuthCheck>
+          <Navbar />
+          <DashboardContainer />
+        </AuthCheck>
+      </div>
     </>
   );
 };

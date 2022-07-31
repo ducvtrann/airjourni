@@ -1,18 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    './node_modules/flowbite-react/**/*.js',
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
+  plugins: [require('flowbite/plugin')],
   presets: [],
   darkMode: 'class', // or 'class'
   theme: {
     screens: {
+      mobileSM: '320px',
+      mobileMD: '375px',
+      mobileLG: '425px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px',
+      xl: '1440px',
     },
     colors: ({ colors }) => ({
       inherit: colors.inherit,
