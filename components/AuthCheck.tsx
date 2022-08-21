@@ -5,7 +5,7 @@ import { useAuth } from '../lib/context/auth.context';
 
 // Component
 import Spinner from './Spinner';
-import SignIn from './SignIn';
+import LoginContainer from './login/LoginContainer';
 
 // Interface
 interface IAuthCheck {
@@ -29,7 +29,7 @@ const AuthCheck: React.FC<IAuthCheck> = ({ children }) => {
   if (user && !loading && !redirectRoutes.includes(router.pathname)) {
     return <>{children}</>;
   } else if (!user && !loading) {
-    return <SignIn />;
+    return <LoginContainer />;
   } else {
     return <Spinner />;
   }

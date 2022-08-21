@@ -1,17 +1,13 @@
 // Package
-import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-
-// Component
-import BaseContainer from './BaseContainer';
+import { Box, Grid, Link, Stack, Typography } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 
 // Data
 const NAVIGATION = [
   { visibleName: 'Product', internalName: 'product' },
   { visibleName: 'Features', internalName: 'features' },
-  { visibleName: 'Suggestion', internalName: 'suggestion' },
+  // { visibleName: 'Suggestion', internalName: 'suggestion' },
 ];
 const LEGAL = [
   { visibleName: 'Terms of Service', internalName: 'legal' },
@@ -21,110 +17,142 @@ const LEGAL = [
 
 // Main
 const Footer: React.FC = () => {
-  const router = useRouter();
-  const isHomePage = router.pathname === '/';
-
   return (
-    <BaseContainer>
-      <div
-        className={`grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-200 dark:border-trueGray-700 ${
-          isHomePage ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
-        }`}
+    <>
+      <Grid
+        container
+        alignItems="center"
+        sx={{ borderTop: 1, borderColor: 'primary.main', p: 3 }}
       >
-        <div className="lg:col-span-2">
-          <div>
-            <Link href="/">
-              <a className="flex items-center space-x-2 text-2xl font-medium text-blue-600 dark:text-gray-100">
-                <span>
-                  <Image
-                    src="/images/svg/logo_v2.svg"
-                    alt="N"
-                    width="32"
-                    height="32"
-                    className="w-8"
-                  ></Image>
-                </span>
-                <span>AirJourni</span>
-              </a>
+        <Grid item xs={12} lg={3}>
+          <Link
+            href="/"
+            underline="none"
+            sx={{
+              display: 'inline-flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              mb: 1,
+            }}
+          >
+            <Image
+              src="/images/logo.png"
+              alt="N"
+              width="32"
+              height="32"
+              className="w-8"
+            ></Image>
+
+            <Typography component="h2" variant="h5" sx={{ fontWeight: 'bold' }}>
+              AirJourni
+            </Typography>
+          </Link>
+
+          <Typography variant="subtitle1" color={'text.secondary'}>
+            AirJourni&apos;s mission is to remove the hassles of planning and
+            bring friends together easier and faster than ever before.
+          </Typography>
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          lg={3}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {NAVIGATION.map((item, index) => (
+            <Link key={index} href={`/#${item.internalName}`} underline="none">
+              {item.visibleName}
             </Link>
-          </div>
-          <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
-            AirJourni was founded with the mission to remove the hassle of
-            planning and focusing on enjoying the trip sooner.
-          </div>
-        </div>
+          ))}
+        </Grid>
 
-        {isHomePage && (
-          <div>
-            <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-              {NAVIGATION.map((item, index) => (
-                <a
-                  key={index}
-                  href={`#${item.internalName}`}
-                  className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-600 focus:text-blue-600 focus:bg-blue-100 dark:focus-bg-trueGray-700"
-                >
-                  {item.visibleName}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+        <Grid
+          item
+          xs={12}
+          lg={3}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          {LEGAL.map((item, index) => (
+            <Link key={index} href={`/${item.internalName}`} underline="none">
+              {item.visibleName}
+            </Link>
+          ))}
+        </Grid>
 
-        <div>
-          <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-            {LEGAL.map((item, index) => (
-              <Link key={index} href={`/${item.internalName}`}>
-                <a className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-600 focus:text-blue-600 focus:bg-blue-100 dark:focus-bg-trueGray-700">
-                  {item.visibleName}
-                </a>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <div>Follow us</div>
-          <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">
-            <a
+        <Grid
+          item
+          xs={12}
+          lg={3}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography sx={{ mb: 1 }}>Follow us</Typography>
+          <Stack direction="row" spacing={2}>
+            <Link
               href="https://twitter.com/helloductrann"
               target="_blank"
               rel="noopener noreferrer"
+              underline="none"
             >
-              <span className="sr-only">Twitter</span>
+              <Box sx={visuallyHidden}>Twitter</Box>
               <Twitter />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.instagram.com/helloductran/"
               target="_blank"
               rel="noopener noreferrer"
+              underline="none"
             >
-              <span className="sr-only">Instagram</span>
+              <Box sx={visuallyHidden}>Instagram</Box>
               <Instagram />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://www.linkedin.com/in/hellductrann/"
               target="_blank"
               rel="noopener noreferrer"
+              underline="none"
             >
-              <span className="sr-only">Linkedin</span>
+              <Box sx={visuallyHidden}>Linkedin</Box>
               <Linkedin />
-            </a>
-          </div>
-        </div>
-      </div>
+            </Link>
+          </Stack>
+        </Grid>
+      </Grid>
 
-      <div className="my-10 text-sm text-center text-gray-600 dark:text-gray-400">
+      <Box
+        sx={{
+          mb: 2,
+          fontSize: 'small',
+          textAlign: 'center',
+          color: 'text.secondary',
+        }}
+      >
         © {new Date().getFullYear()} AirJourni - Made with ♥ in Atlanta -
-        Illustrations from{' '}
-        <a
-          href="https://icons8.com/"
+        Illustrations by{' '}
+        <Link
+          href="https://storyset.com/"
           target="_blank"
           rel="noopener  noreferrer"
         >
-          ICONS8
-        </a>
-      </div>
-    </BaseContainer>
+          Storyset
+        </Link>
+      </Box>
+    </>
   );
 };
 

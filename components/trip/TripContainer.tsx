@@ -2,25 +2,24 @@
 import { useState } from 'react';
 
 // Component
-import RecentTrip from './RecentTrip';
+import CurrentTrip from './CurrentTrip';
 import ContactList from './ContactList';
+
+// Interface
+interface IViews {
+  currentTrip: JSX.Element;
+  contactList: JSX.Element;
+}
 
 // Main
 const ChatContainer: React.FC = () => {
-  const [isShowingTrip, setShowTrip] = useState(true);
+  const [currentView, setCurrentView] = useState('contactList');
+  const views: IViews = {
+    currentTrip: <CurrentTrip setCurrentView={setCurrentView} />,
+    contactList: <ContactList setCurrentView={setCurrentView} />,
+  };
 
-  return (
-    <div
-      id="trip"
-      className="flex flex-col flex-grow md:w-5/12 md:border-r md:border-gray-300 xl:w-3/12"
-    >
-      {isShowingTrip ? (
-        <RecentTrip isShowingTrip={isShowingTrip} setShowTrip={setShowTrip} />
-      ) : (
-        <ContactList isShowingTrip={isShowingTrip} setShowTrip={setShowTrip} />
-      )}
-    </div>
-  );
+  return views[currentView as keyof IViews];
 };
 
 export default ChatContainer;

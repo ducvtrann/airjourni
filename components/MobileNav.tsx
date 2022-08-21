@@ -1,12 +1,12 @@
 // Package
 import { Dispatch, SetStateAction } from 'react';
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import {
-  MdMms,
-  MdAirplaneTicket,
-  MdAccountCircle,
-  MdLocalActivity,
-} from 'react-icons/md';
-import React from 'react';
+  AirplaneTicket,
+  AccountCircle,
+  AddLocationAlt,
+  Luggage,
+} from '@mui/icons-material';
 
 // Interface
 interface IMobileNav {
@@ -19,43 +19,46 @@ const navItems = [
   {
     visibleName: 'Trips',
     internalName: 'trips',
-    icon: <MdMms className="w-6 h-6" />,
+    icon: <Luggage />,
   },
   {
     visibleName: 'Attractions',
     internalName: 'attractions',
-    icon: <MdLocalActivity className="w-6 h-6" />,
+    icon: <AddLocationAlt />,
   },
   {
     visibleName: 'Flights',
     internalName: 'flights',
-    icon: <MdAirplaneTicket className="w-6 h-6" />,
+    icon: <AirplaneTicket />,
   },
   {
     visibleName: 'Profile',
     internalName: 'profile',
-    icon: <MdAccountCircle className="w-6 h-6" />,
+    icon: <AccountCircle />,
   },
 ];
 
 // Main
 const MobileNav: React.FC<IMobileNav> = ({ currentView, setCurrentView }) => {
   return (
-    <div className="flex items-center justify-between h-16 p-3 border-t border-gray-300 md:hidden">
-      {navItems.map((nav, index) => (
-        <button
-          key={index}
-          type="button"
-          className={`flex flex-col items-center ${
-            currentView === nav.internalName ? 'text-blue-700' : 'text-gray-400'
-          }`}
-          onClick={() => setCurrentView(nav.internalName)}
-        >
-          {nav.icon}
-          <span>{nav.visibleName}</span>
-        </button>
-      ))}
-    </div>
+    <Box sx={{ width: '100%', borderTop: 1, borderColor: 'grey.300' }}>
+      <BottomNavigation
+        showLabels
+        value={currentView}
+        onChange={(_event, newValue) => {
+          setCurrentView(newValue);
+        }}
+      >
+        {navItems.map((nav, index) => (
+          <BottomNavigationAction
+            key={index}
+            value={nav.internalName}
+            label={nav.visibleName}
+            icon={nav.icon}
+          />
+        ))}
+      </BottomNavigation>
+    </Box>
   );
 };
 

@@ -1,12 +1,13 @@
 // Package
+import { Box } from '@mui/material';
 import { useState } from 'react';
 
 // Component
-import ChatContainer from 'components/trip/TripContainer';
+import TripContainer from 'components/trip/TripContainer';
 import AttractionContainer from 'components/attraction/AttractionContainer';
-import FlightContainer from './flight/FlightContainer';
-import ProfileContainer from './ProfileContainer';
-import MobileNav from './MobileNav';
+import FlightContainer from '../flight/FlightContainer';
+import ProfileContainer from '../profile/ProfileContainer';
+import MobileNav from '../MobileNav';
 
 // Interface
 interface IViews {
@@ -20,17 +21,17 @@ interface IViews {
 const MobileContainer: React.FC = () => {
   const [currentView, setCurrentView] = useState('trips');
   const views: IViews = {
-    trips: <ChatContainer />,
+    trips: <TripContainer />,
     attractions: <AttractionContainer />,
     flights: <FlightContainer />,
     profile: <ProfileContainer />,
   };
 
   return (
-    <>
-      {views[currentView as keyof IViews]}
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <Box sx={{ flexGrow: 1 }}>{views[currentView as keyof IViews]}</Box>
       <MobileNav currentView={currentView} setCurrentView={setCurrentView} />
-    </>
+    </Box>
   );
 };
 

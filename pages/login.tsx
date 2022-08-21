@@ -3,13 +3,13 @@ import type { NextPage } from 'next';
 
 // Component
 import AuthCheck from '../components/AuthCheck';
-import SignIn from '../components/SignIn';
+import LoginContainer from '../components/login/LoginContainer';
 
 // Main Component
 const Login: NextPage = () => {
   return (
     <AuthCheck>
-      <SignIn />
+      <LoginContainer />
     </AuthCheck>
   );
 };

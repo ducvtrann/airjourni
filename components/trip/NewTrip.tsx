@@ -1,56 +1,89 @@
 // Package
-import { MdPlace, MdPersonAdd } from 'react-icons/md';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { Button, TextInput } from 'flowbite-react';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import {
+  Button,
+  FormControl,
+  InputAdornment,
+  OutlinedInput,
+  Stack,
+} from '@mui/material';
 
 // Component
 import Calendar from './Calendar';
 
 // Interface
 interface INewTrip {
-  setShowTrip: Dispatch<SetStateAction<boolean>>;
+  setCurrentView: Dispatch<SetStateAction<string>>;
 }
 
 // Main
-const NewTrip: React.FC<INewTrip> = ({ setShowTrip }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+const NewTrip: React.FC<INewTrip> = ({ setCurrentView }) => {
+  const [tripName, setTripName] = useState('');
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(tripName);
+    console.log(startDate);
+    console.log(endDate);
+  };
 
   return (
-    <form className="flex flex-col gap-4">
-      <div>
-        <TextInput
-          id="destination"
-          type="text"
-          placeholder="Give your trip a name"
-          required={true}
-          icon={MdPlace}
-        />
-      </div>
-      <div>
-        <Calendar {...{ startDate, setStartDate, endDate, setEndDate }} />
-      </div>
-      <div>
-        <TextInput
-          id="members"
-          type="text"
-          placeholder="Invite friends or solo your journey"
-          required={false}
-          icon={MdPersonAdd}
-        />
-      </div>
-      <div className="flex items-center justify-center gap-2">
-        <Button
-          color="gray"
-          size="sm"
-          onClick={() => {
-            setShowTrip(true);
-          }}
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <Stack
+        spacing={2}
+        sx={{ borderBottom: 1, borderColor: 'grey.300', pb: 2 }}
+      >
+        <FormControl
+          margin="dense"
+          size="small"
+          fullWidth={true}
+          sx={{ mb: -0.5 }}
         >
-          Cancel
-        </Button>
-        <Button size="sm">Create</Button>
-      </div>
+          <OutlinedInput
+            placeholder="Give your trip a name"
+            sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
+            value={tripName}
+            onChange={(e) => setTripName(e.target.value)}
+            startAdornment={
+              <InputAdornment position="start">
+                <LocationOnIcon />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
+        <Calendar {...{ startDate, setStartDate, endDate, setEndDate }} />
+
+        <FormControl margin="dense" size="small" fullWidth={true}>
+          <OutlinedInput
+            sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
+            placeholder="Invite friends"
+            value={tripName}
+            onChange={(e) => setTripName(e.target.value)}
+            startAdornment={
+              <InputAdornment position="start">
+                <GroupAddIcon />
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Button
+            variant="outlined"
+            onClick={() => setCurrentView('currentTrip')}
+          >
+            Cancel
+          </Button>
+          <Button variant="contained" type="submit">
+            Create
+          </Button>
+        </Stack>
+      </Stack>
     </form>
   );
 };

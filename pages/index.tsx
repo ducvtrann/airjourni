@@ -4,17 +4,8 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../lib/context/auth.context';
 import { useEffect } from 'react';
 
-// Data
-import { benefitOne, benefitTwo } from '../lib/static/benefitData';
-
 // Component
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import Benefit from '../components/Benefit';
-import LoginCta from '../components/LoginCta';
-import Feedback from '../components/Feedback';
-import Footer from '../components/Footer';
-import SectionTitle from '../components/SectionTitle';
+import LandingContainer from '../components/landing/LandingContainer';
 import Spinner from '../components/Spinner';
 
 // Main Component
@@ -28,25 +19,7 @@ const Home: NextPage = () => {
     }
   });
 
-  if (!user && !loading) {
-    return (
-      <>
-        <Navbar />
-        <Hero />
-        <SectionTitle
-          title="Features"
-          subTitle="For every trip and every destination - one set of tools"
-        />
-        <Benefit {...benefitOne} />
-        <Benefit {...benefitTwo} />
-        <LoginCta />
-        <Feedback />
-        <Footer />
-      </>
-    );
-  } else {
-    return <Spinner />;
-  }
+  return !user && !loading ? <LandingContainer /> : <Spinner />;
 };
 
 export default Home;
