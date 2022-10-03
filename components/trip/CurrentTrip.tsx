@@ -57,7 +57,7 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView, setAddFriend }) => {
           <Typography
             sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 24 }}
           >
-            Trips
+            Current Trips
           </Typography>
           <Stack direction="row" justifyContent="space-between">
             <IconButton

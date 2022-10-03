@@ -50,7 +50,7 @@ const ContactList: React.FC<IChatList> = ({
           <Typography
             sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 24 }}
           >
-            New Trip
+            {showAddFriend ? 'New Friend' : 'New Trip'}
           </Typography>
         </Stack>
         {showAddFriend ? (

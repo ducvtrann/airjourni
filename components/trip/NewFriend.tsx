@@ -29,7 +29,7 @@ const NewFriend: React.FC<INewFriend> = ({ setAddFriend, setCurrentView }) => {
         <FormControl margin="dense" size="small" fullWidth={true}>
           <OutlinedInput
             sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
-            placeholder="Add friend by email"
+            placeholder="Add friends by email"
             value={newFriendEmail}
             onChange={(e) => setNewFriendEmail(e.target.value)}
             startAdornment={
