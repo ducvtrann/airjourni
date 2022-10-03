@@ -33,10 +33,7 @@ const NewTrip: React.FC<INewTrip> = ({ setCurrentView }) => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <Stack
-        spacing={2}
-        sx={{ borderBottom: 1, borderColor: 'grey.300', pb: 2 }}
-      >
+      <Stack spacing={2} sx={{ pb: 2 }}>
         <FormControl
           margin="dense"
           size="small"

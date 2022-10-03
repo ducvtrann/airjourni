@@ -17,12 +17,7 @@ const SearchTrip: React.FC<ISearchTrip> = ({ searchTrip, requestSearch }) => {
     requestSearch(e.target.value);
   };
   return (
-    <FormControl
-      margin="dense"
-      size="small"
-      fullWidth={true}
-      sx={{ borderBottom: 1, borderColor: 'grey.300' }}
-    >
+    <FormControl margin="dense" size="small" fullWidth={true}>
       <OutlinedInput
         placeholder="Search recent trips"
         sx={{ bgcolor: 'grey.100', borderRadius: 4, mb: 2 }}

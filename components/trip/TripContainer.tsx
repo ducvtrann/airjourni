@@ -12,14 +12,27 @@ interface IViews {
 }
 
 // Main
-const ChatContainer: React.FC = () => {
+const TripContainer: React.FC = () => {
   const [currentView, setCurrentView] = useState('contactList');
+  const [showAddFriend, setAddFriend] = useState(false);
+
   const views: IViews = {
-    currentTrip: <CurrentTrip setCurrentView={setCurrentView} />,
-    contactList: <ContactList setCurrentView={setCurrentView} />,
+    currentTrip: (
+      <CurrentTrip
+        setCurrentView={setCurrentView}
+        setAddFriend={setAddFriend}
+      />
+    ),
+    contactList: (
+      <ContactList
+        setCurrentView={setCurrentView}
+        setAddFriend={setAddFriend}
+        showAddFriend={showAddFriend}
+      />
+    ),
   };
 
   return views[currentView as keyof IViews];
 };
 
-export default ChatContainer;
+export default TripContainer;

@@ -7,58 +7,28 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Stack,
   Typography,
 } from '@mui/material';
 
 // Component
 import NewTrip from './NewTrip';
+import NewFriend from './NewFriend';
 
 // Interface
 interface IChatList {
   setCurrentView: Dispatch<SetStateAction<string>>;
+  setAddFriend: Dispatch<SetStateAction<boolean>>;
+  showAddFriend: boolean;
 }
 
 // Main
-const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
+const ContactList: React.FC<IChatList> = ({
+  setCurrentView,
+  setAddFriend,
+  showAddFriend,
+}) => {
   const dummyData = [
-    {
-      name: 'Duc Tran',
-      dates: Date.now(),
-    },
-    {
-      name: 'Ducky',
-      dates: Date.now(),
-    },
-    {
-      name: 'Duck Sauce',
-      dates: Date.now(),
-    },
-    {
-      name: 'Duc Tran',
-      dates: Date.now(),
-    },
-    {
-      name: 'Ducky',
-      dates: Date.now(),
-    },
-    {
-      name: 'Duck Sauce',
-      dates: Date.now(),
-    },
-    ,
-    {
-      name: 'Duc Tran',
-      dates: Date.now(),
-    },
-    {
-      name: 'Ducky',
-      dates: Date.now(),
-    },
-    {
-      name: 'Duck Sauce',
-      dates: Date.now(),
-    },
-    ,
     {
       name: 'Duc Tran',
       dates: Date.now(),
@@ -74,24 +44,24 @@ const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
   ];
 
   return (
-    <Box
-      sx={{ height: '100%', p: 2, display: 'flex', flexDirection: 'column' }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginBottom: 1,
-        }}
-      >
-        <Typography
-          sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 30 }}
-        >
-          New Trip
-        </Typography>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ p: 2, paddingBottom: 0 }}>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography
+            sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 24 }}
+          >
+            New Trip
+          </Typography>
+        </Stack>
+        {showAddFriend ? (
+          <NewFriend
+            setCurrentView={setCurrentView}
+            setAddFriend={setAddFriend}
+          />
+        ) : (
+          <NewTrip setCurrentView={setCurrentView} />
+        )}
       </Box>
-
-      <NewTrip setCurrentView={setCurrentView} />
 
       <Box
         sx={{
@@ -101,7 +71,7 @@ const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
           height: 0,
         }}
       >
-        <List sx={{ overflowY: 'scroll' }}>
+        <List sx={{ overflowY: 'auto', borderTop: 1, borderColor: 'grey.300' }}>
           {dummyData.map((trip, index) => (
             <ListItem key={index}>
               <ListItemAvatar>

@@ -9,79 +9,28 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Stack,
   Typography,
 } from '@mui/material';
-import MapsUgcIcon from '@mui/icons-material/MapsUgc';
-
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // Component
 import SearchTrip from './SearchTrip';
 
 // Interface
 interface IChatList {
   setCurrentView: Dispatch<SetStateAction<string>>;
+  setAddFriend: Dispatch<SetStateAction<boolean>>;
 }
 
-const dummyData = [
-  {
-    name: 'Lima Peru',
-    dates: Date.now(),
-  },
-  {
-    name: 'Paris France',
-    dates: Date.now(),
-  },
-  {
-    name: 'Sao Paulo  Brazil ',
-    dates: Date.now(),
-  },
-  {
-    name: 'Lima Peru',
-    dates: Date.now(),
-  },
-  {
-    name: 'Paris France',
-    dates: Date.now(),
-  },
-  {
-    name: 'Sao Paulo  Brazil ',
-    dates: Date.now(),
-  },
-  {
-    name: 'Lima Peru',
-    dates: Date.now(),
-  },
-  {
-    name: 'Paris France',
-    dates: Date.now(),
-  },
-  {
-    name: 'Sao Paulo  Brazil ',
-    dates: Date.now(),
-  },
-  {
-    name: 'Sao Paulo  Brazil ',
-    dates: Date.now(),
-  },
-  {
-    name: 'Lima Peru',
-    dates: Date.now(),
-  },
-  {
-    name: 'Paris France',
-    dates: Date.now(),
-  },
-  {
-    name: 'Sao Paulo  Brazil ',
-    dates: Date.now(),
-  },
-];
+const dummyData: { name: string; dates: string }[] = [];
 // Main
-const CurrentTrip: React.FC<IChatList> = ({ setCurrentView }) => {
+const CurrentTrip: React.FC<IChatList> = ({ setCurrentView, setAddFriend }) => {
   const [staticCurrentTrip, setStaticCurrentTrip] = useState<
-    { name: string; dates: number }[]
+    { name: string; dates: string }[]
   >([]);
   const [currentTrip, setCurrentTrip] = useState<
-    { name: string; dates: number }[]
+    { name: string; dates: string }[]
   >([]);
   const [searchTrip, setSearchTrip] = useState('');
 
@@ -102,29 +51,36 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView }) => {
   };
 
   return (
-    <Box
-      sx={{ height: '100%', p: 2, display: 'flex', flexDirection: 'column' }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography
-          sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 30 }}
-        >
-          Trips
-        </Typography>
-        <IconButton
-          onClick={() => setCurrentView('contactList')}
-          size="medium"
-          color="primary"
-        >
-          <MapsUgcIcon />
-        </IconButton>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ p: 2, paddingBottom: 0 }}>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography
+            sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 24 }}
+          >
+            Trips
+          </Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <IconButton
+              onClick={() => setCurrentView('contactList')}
+              size="medium"
+              color="primary"
+            >
+              <AddPhotoAlternateIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setAddFriend(true);
+                setCurrentView('contactList');
+              }}
+              size="medium"
+              color="primary"
+            >
+              <PersonAddIcon />
+            </IconButton>
+          </Stack>
+        </Stack>
+        <SearchTrip searchTrip={searchTrip} requestSearch={requestSearch} />
       </Box>
-      <SearchTrip searchTrip={searchTrip} requestSearch={requestSearch} />
       <Box
         sx={{
           flexGrow: 1,
@@ -133,7 +89,7 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView }) => {
           height: 0,
         }}
       >
-        <List sx={{ overflowY: 'scroll' }}>
+        <List sx={{ overflowY: 'auto', borderTop: 1, borderColor: 'grey.300' }}>
           {currentTrip.map((trip, index) => (
             <Box key={index}>
               <ListItem>
