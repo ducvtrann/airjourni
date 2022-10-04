@@ -7,7 +7,6 @@ import {
   where,
   limit,
   getDocs,
-  getDoc,
 } from 'firebase/firestore';
 
 const { auth, firestore } = getFirebase();

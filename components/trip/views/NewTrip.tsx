@@ -22,7 +22,7 @@ interface IChatList {
 
 // Main
 const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
-  const dummyData = [];
+  const dummyData: { name: string; dates: string }[] = [];
 
   useEffect(() => {
     const friendRequests = getFriendRequests();
