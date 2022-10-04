@@ -15,17 +15,16 @@ import {
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // Component
-import SearchTrip from './SearchTrip';
+import SearchTripInput from '../SearchTripInput';
 
 // Interface
 interface IChatList {
   setCurrentView: Dispatch<SetStateAction<string>>;
-  setAddFriend: Dispatch<SetStateAction<boolean>>;
 }
 
 const dummyData: { name: string; dates: string }[] = [];
 // Main
-const CurrentTrip: React.FC<IChatList> = ({ setCurrentView, setAddFriend }) => {
+const CurrentTrip: React.FC<IChatList> = ({ setCurrentView }) => {
   const [staticCurrentTrip, setStaticCurrentTrip] = useState<
     { name: string; dates: string }[]
   >([]);
@@ -55,13 +54,13 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView, setAddFriend }) => {
       <Box sx={{ p: 2, paddingBottom: 0 }}>
         <Stack direction="row" justifyContent="space-between">
           <Typography
-            sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 24 }}
+            sx={{ color: 'grey.800', fontWeight: 'bold', fontSize: 20 }}
           >
             Current Trips
           </Typography>
           <Stack direction="row" justifyContent="space-between">
             <IconButton
-              onClick={() => setCurrentView('contactList')}
+              onClick={() => setCurrentView('newTrip')}
               size="medium"
               color="primary"
             >
@@ -69,8 +68,7 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView, setAddFriend }) => {
             </IconButton>
             <IconButton
               onClick={() => {
-                setAddFriend(true);
-                setCurrentView('contactList');
+                setCurrentView('friendRequests');
               }}
               size="medium"
               color="primary"
@@ -79,7 +77,10 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView, setAddFriend }) => {
             </IconButton>
           </Stack>
         </Stack>
-        <SearchTrip searchTrip={searchTrip} requestSearch={requestSearch} />
+        <SearchTripInput
+          searchTrip={searchTrip}
+          requestSearch={requestSearch}
+        />
       </Box>
       <Box
         sx={{

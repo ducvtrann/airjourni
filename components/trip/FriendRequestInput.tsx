@@ -8,19 +8,22 @@ import {
   OutlinedInput,
   Stack,
 } from '@mui/material';
+import { sendFriendRequest } from '../../lib/firebase/contact';
 
 // Interface
 interface INewFriend {
   setCurrentView: Dispatch<SetStateAction<string>>;
-  setAddFriend: Dispatch<SetStateAction<boolean>>;
 }
 
 // Main
-const NewFriend: React.FC<INewFriend> = ({ setAddFriend, setCurrentView }) => {
+const NewFriend: React.FC<INewFriend> = ({ setCurrentView }) => {
   const [newFriendEmail, setNewFriendEmail] = useState('');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    await sendFriendRequest(newFriendEmail);
+    console.log(newFriendEmail);
+    // setNewFriendEmail('');
   };
 
   return (
@@ -45,13 +48,12 @@ const NewFriend: React.FC<INewFriend> = ({ setAddFriend, setCurrentView }) => {
             variant="outlined"
             onClick={() => {
               setCurrentView('currentTrip');
-              setAddFriend(false);
             }}
           >
             Cancel
           </Button>
           <Button variant="contained" type="submit">
-            Create
+            Send request
           </Button>
         </Stack>
       </Stack>

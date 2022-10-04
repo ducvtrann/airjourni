@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 // Component
-import Calendar from './Calendar';
+import Calendar from './CalendarInput';
 
 // Interface
 interface INewTrip {

@@ -1,5 +1,5 @@
 // Package
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -10,57 +10,36 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { getFriendRequests } from '../../../lib/firebase/contact';
 
 // Component
-import NewTrip from './NewTrip';
-import NewFriend from './NewFriend';
+import NewTripInput from '../NewTripInput';
 
 // Interface
 interface IChatList {
   setCurrentView: Dispatch<SetStateAction<string>>;
-  setAddFriend: Dispatch<SetStateAction<boolean>>;
-  showAddFriend: boolean;
 }
 
 // Main
-const ContactList: React.FC<IChatList> = ({
-  setCurrentView,
-  setAddFriend,
-  showAddFriend,
-}) => {
-  const dummyData = [
-    {
-      name: 'Duc Tran',
-      dates: Date.now(),
-    },
-    {
-      name: 'Ducky',
-      dates: Date.now(),
-    },
-    {
-      name: 'Duck Sauce',
-      dates: Date.now(),
-    },
-  ];
+const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
+  const dummyData = [];
+
+  useEffect(() => {
+    const friendRequests = getFriendRequests();
+    console.log(friendRequests);
+  }, []);
 
   return (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ p: 2, paddingBottom: 0 }}>
         <Stack direction="row" justifyContent="space-between">
           <Typography
-            sx={{ color: 'primary.main', fontWeight: 'bold', fontSize: 24 }}
+            sx={{ color: 'grey.800', fontWeight: 'bold', fontSize: 20 }}
           >
-            {showAddFriend ? 'New Friend' : 'New Trip'}
+            New Trip
           </Typography>
         </Stack>
-        {showAddFriend ? (
-          <NewFriend
-            setCurrentView={setCurrentView}
-            setAddFriend={setAddFriend}
-          />
-        ) : (
-          <NewTrip setCurrentView={setCurrentView} />
-        )}
+        <NewTripInput setCurrentView={setCurrentView} />
       </Box>
 
       <Box
