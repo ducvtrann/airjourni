@@ -54,7 +54,7 @@ const CurrentTrip: React.FC<IChatList> = ({ setCurrentView }) => {
       <Box sx={{ p: 2, paddingBottom: 0 }}>
         <Stack direction="row" justifyContent="space-between">
           <Typography
-            sx={{ color: 'grey.800', fontWeight: 'bold', fontSize: 20 }}
+            sx={{ color: 'grey.700', fontWeight: 'bold', fontSize: 20 }}
           >
             Current Trips
           </Typography>

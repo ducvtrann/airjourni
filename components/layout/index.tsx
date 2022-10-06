@@ -14,8 +14,8 @@ const Root = (props: Layout) => (
         bgcolor: 'background.paper',
         display: 'grid',
         gridTemplateColumns: {
-          md: 'minmax(268px, 450px) minmax(500px, 1fr)',
-          lg: '500px 1fr',
+          md: 'minmax(268px, 350px) minmax(500px, 1fr)',
+          lg: '400px 1fr',
         },
         gridTemplateRows: '64px 1fr',
         minHeight: '100vh',

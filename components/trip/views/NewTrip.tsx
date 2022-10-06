@@ -1,5 +1,5 @@
 // Package
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import {
   Avatar,
   Box,
@@ -10,7 +10,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { getFriendRequests } from '../../../lib/firebase/contact';
 
 // Component
 import NewTripInput from '../NewTripInput';
@@ -24,17 +23,12 @@ interface IChatList {
 const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
   const dummyData: { name: string; dates: string }[] = [];
 
-  useEffect(() => {
-    const friendRequests = getFriendRequests();
-    console.log(friendRequests);
-  }, []);
-
   return (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Box sx={{ p: 2, paddingBottom: 0 }}>
         <Stack direction="row" justifyContent="space-between">
           <Typography
-            sx={{ color: 'grey.800', fontWeight: 'bold', fontSize: 20 }}
+            sx={{ color: 'grey.700', fontWeight: 'bold', fontSize: 20 }}
           >
             New Trip
           </Typography>
