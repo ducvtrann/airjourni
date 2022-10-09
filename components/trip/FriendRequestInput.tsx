@@ -1,6 +1,6 @@
 // Package
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
 import { FormEvent, useState } from 'react';
 import {
   Box,
@@ -34,8 +34,8 @@ const NewFriend: React.FC = ({}) => {
             </InputAdornment>
           }
           endAdornment={
-            <IconButton type="button" aria-label="search">
-              <SearchIcon />
+            <IconButton type="submit" aria-label="search">
+              <AddIcon />
             </IconButton>
           }
           sx={{ pr: 0 }}
