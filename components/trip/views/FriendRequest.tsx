@@ -13,6 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { getFirebase } from '../../../lib/firebase';
+import { addFriend, declineFriend } from '../../../lib/firebase/contact';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -100,10 +101,19 @@ const FriendRequest: React.FC<IChatList> = ({ setCurrentView }) => {
                     component="span"
                     sx={{ mt: 1 }}
                   >
-                    <Button variant="contained" type="submit">
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      onClick={() => addFriend(friend.id)}
+                    >
                       Confirm
                     </Button>
-                    <Button variant="outlined">Delete</Button>
+                    <Button
+                      variant="outlined"
+                      onClick={() => declineFriend(friend.id)}
+                    >
+                      Delete
+                    </Button>
                   </Stack>
                 }
               />

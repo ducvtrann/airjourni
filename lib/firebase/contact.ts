@@ -7,6 +7,7 @@ import {
   where,
   limit,
   getDocs,
+  getDoc,
 } from 'firebase/firestore';
 
 const { auth, firestore } = getFirebase();
@@ -48,5 +49,67 @@ export const sendFriendRequest = async (email: string) => {
     }
   } catch (error) {
     console.log(`Error sendContactRequest: ${error}`);
+  }
+};
+
+export const addFriend = async (uid: string) => {
+  try {
+    const currentUser = auth.currentUser;
+    const docRef = doc(
+      firestore,
+      `users/${currentUser?.uid}/contact_requests/${uid}`
+    );
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const friend = docSnap.data();
+      setDoc(
+        doc(firestore, `users/${currentUser?.uid}/contact_requests/${uid}`),
+        {
+          ...friend,
+          status: 'accepted',
+        },
+        { merge: true }
+      );
+
+      setDoc(doc(firestore, `users/${currentUser?.uid}/contacts/${uid}`), {
+        name: friend.name,
+        id: friend.id,
+      });
+
+      setDoc(doc(firestore, `users/${uid}/contacts/${currentUser?.uid}`), {
+        name: currentUser?.displayName,
+        id: currentUser?.uid,
+      });
+    } else {
+      console.log('No such document!');
+    }
+  } catch (error) {
+    console.log(`Error addFriend: ${error}`);
+  }
+};
+
+export const declineFriend = async (uid: string) => {
+  try {
+    const currentUser = auth.currentUser;
+    const docRef = doc(
+      firestore,
+      `users/${currentUser?.uid}/contact_requests/${uid}`
+    );
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const friend = docSnap.data();
+      setDoc(
+        doc(firestore, `users/${currentUser?.uid}/contact_requests/${uid}`),
+        {
+          ...friend,
+          status: 'decline',
+        },
+        { merge: true }
+      );
+    } else {
+      console.log('No such document!');
+    }
+  } catch (error) {
+    console.log(`Error declineFriend: ${error}`);
   }
 };
