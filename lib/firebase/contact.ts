@@ -33,7 +33,7 @@ export const sendFriendRequest = async (email: string) => {
     const requestedUser = await locateUserBy('email', email);
 
     if (requestedUser && currentUser) {
-      await setDoc(
+      setDoc(
         doc(
           firestore,
           `users/${requestedUser.uid}/contact_requests/${currentUser.uid}`
