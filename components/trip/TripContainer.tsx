@@ -9,18 +9,18 @@ import CurrentTrip from './views/CurrentTrip';
 // Interface
 interface IViews {
   currentTrip: JSX.Element;
-  newTrip: JSX.Element;
   friendRequests: JSX.Element;
+  newTrip: JSX.Element;
 }
 
 // Main
 const TripContainer: React.FC = () => {
-  const [currentView, setCurrentView] = useState('friendRequests');
+  const [currentView, setCurrentView] = useState('newTrip');
 
   const views: IViews = {
-    newTrip: <NewTrip setCurrentView={setCurrentView} />,
-    friendRequests: <FriendRequest setCurrentView={setCurrentView} />,
     currentTrip: <CurrentTrip setCurrentView={setCurrentView} />,
+    friendRequests: <FriendRequest setCurrentView={setCurrentView} />,
+    newTrip: <NewTrip setCurrentView={setCurrentView} />,
   };
 
   return views[currentView as keyof IViews];

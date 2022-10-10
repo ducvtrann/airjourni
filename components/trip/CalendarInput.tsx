@@ -5,11 +5,13 @@
 // Package
 import React from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { FormControl, InputAdornment, OutlinedInput } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
+import { Stack } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import 'react-datepicker/dist/react-datepicker.css';
+
 // Interface
 interface ICalendar {
   startDate: Date;
@@ -26,7 +28,7 @@ const Calendar: React.FC<ICalendar> = ({
   setEndDate,
 }) => {
   return (
-    <>
+    <Stack direction="row" spacing={2} sx={{ mt: '0px !important' }}>
       <DatePicker
         selected={startDate}
         onChange={(date: Date) => {
@@ -47,7 +49,7 @@ const Calendar: React.FC<ICalendar> = ({
         minDate={startDate}
         customInput={<EndDatePickerCustom />}
       />
-    </>
+    </Stack>
   );
 };
 
@@ -57,7 +59,6 @@ const StartDatePickerCustom = React.forwardRef((props, ref) => {
       <OutlinedInput
         onClick={props.onClick}
         ref={ref}
-        sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
         value={props.value}
         startAdornment={
           <InputAdornment position="start">
@@ -77,7 +78,6 @@ const EndDatePickerCustom = React.forwardRef((props, ref) => {
       <OutlinedInput
         onClick={props.onClick}
         ref={ref}
-        sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
         value={props.value}
         startAdornment={
           <InputAdornment position="start">

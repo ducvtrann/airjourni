@@ -3,6 +3,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import {
+  Box,
   Button,
   FormControl,
   InputAdornment,
@@ -32,8 +33,8 @@ const NewTrip: React.FC<INewTrip> = ({ setCurrentView }) => {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <Stack spacing={2} sx={{ pb: 2 }}>
+    <Box component="form" onSubmit={(e) => handleSubmit(e)}>
+      <Stack spacing={2}>
         <FormControl
           margin="dense"
           size="small"
@@ -42,7 +43,6 @@ const NewTrip: React.FC<INewTrip> = ({ setCurrentView }) => {
         >
           <OutlinedInput
             placeholder="Give your trip a name"
-            sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
             value={tripName}
             onChange={(e) => setTripName(e.target.value)}
             startAdornment={
@@ -57,7 +57,6 @@ const NewTrip: React.FC<INewTrip> = ({ setCurrentView }) => {
 
         <FormControl margin="dense" size="small" fullWidth={true}>
           <OutlinedInput
-            sx={{ bgcolor: 'grey.100', borderRadius: 4 }}
             placeholder="Invite friends"
             value={tripName}
             onChange={(e) => setTripName(e.target.value)}
@@ -81,7 +80,7 @@ const NewTrip: React.FC<INewTrip> = ({ setCurrentView }) => {
           </Button>
         </Stack>
       </Stack>
-    </form>
+    </Box>
   );
 };
 

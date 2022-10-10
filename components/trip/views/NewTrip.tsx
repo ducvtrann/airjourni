@@ -58,7 +58,6 @@ const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
         </Stack>
         <NewTripInput setCurrentView={setCurrentView} />
       </Box>
-
       <Box
         sx={{
           flexGrow: 1,
