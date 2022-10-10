@@ -9,7 +9,7 @@ import {
   InputAdornment,
   OutlinedInput,
 } from '@mui/material';
-import { sendFriendRequest } from '../../lib/firebase/contact';
+import { sendFriendRequest } from '../../lib/firebase/friend';
 
 // Main
 const NewFriend: React.FC = ({}) => {

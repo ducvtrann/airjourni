@@ -12,9 +12,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { getFirebase } from '../../../lib/firebase';
-import { addFriend, declineFriend } from '../../../lib/firebase/contact';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import {
+  friendRequestList,
+  addFriend,
+  declineFriend,
+} from '../../../lib/firebase/friend';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Component
@@ -27,31 +29,20 @@ interface IChatList {
 
 // Main
 const FriendRequest: React.FC<IChatList> = ({ setCurrentView }) => {
-  const { auth, firestore } = getFirebase();
-  const currentUser = auth.currentUser;
   const [friendRequests, setFriendRequests] = useState<
     { id: string; name: string }[]
   >([]);
 
   useEffect(() => {
-    const getFriendRequestsQuery = query(
-      collection(firestore, `users/${currentUser?.uid}/contact_requests`),
-      where('status', '==', 'pending')
-    );
+    const fetchFriendRequests = async () => {
+      const data = await friendRequestList();
+      if (data) {
+        setFriendRequests(data);
+      }
+    };
 
-    const unsubscribe = onSnapshot(getFriendRequestsQuery, (querySnapshot) => {
-      const friendRequests = querySnapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          id: data.id,
-          name: data.name,
-        };
-      });
-      setFriendRequests(friendRequests);
-    });
-
-    return () => unsubscribe();
-  }, [currentUser?.uid, firestore]);
+    fetchFriendRequests();
+  }, []);
 
   return (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>

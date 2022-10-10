@@ -1,8 +1,9 @@
 // Package
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   Avatar,
   Box,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
@@ -10,6 +11,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+import { friendList } from '../../../lib/firebase/friend';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // Component
 import NewTripInput from '../NewTripInput';
@@ -21,12 +24,32 @@ interface IChatList {
 
 // Main
 const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
-  const dummyData: { name: string; dates: string }[] = [];
+  const [friendsList, setFriendsList] = useState<
+    { id: string; name: string }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await friendList();
+      if (data) {
+        setFriendsList(data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ p: 2, paddingBottom: 0 }}>
-        <Stack direction="row" justifyContent="space-between">
+      <Box sx={{ p: 2 }}>
+        <Stack direction="row" alignItems="center">
+          <IconButton
+            onClick={() => setCurrentView('currentTrip')}
+            size="medium"
+            color="primary"
+          >
+            <ArrowBackIcon />
+          </IconButton>
           <Typography
             sx={{ color: 'grey.700', fontWeight: 'bold', fontSize: 20 }}
           >
@@ -45,12 +68,12 @@ const ContactList: React.FC<IChatList> = ({ setCurrentView }) => {
         }}
       >
         <List sx={{ overflowY: 'auto', borderTop: 1, borderColor: 'grey.300' }}>
-          {dummyData.map((trip, index) => (
+          {friendsList.map((friend, index) => (
             <ListItem key={index}>
               <ListItemAvatar>
                 <Avatar></Avatar>
               </ListItemAvatar>
-              <ListItemText primary={trip.name} secondary={trip.dates} />
+              <ListItemText primary={friend.name} />
             </ListItem>
           ))}
         </List>

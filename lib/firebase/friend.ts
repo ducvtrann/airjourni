@@ -28,6 +28,49 @@ const locateUserBy = async (searchBy: string, searchValue: string) => {
   }
 };
 
+export const friendList = async () => {
+  try {
+    const currentUser = auth.currentUser;
+    const docsRef = collection(firestore, `users/${currentUser?.uid}/friends`);
+    const querySnapshot = await getDocs(docsRef);
+    const friendList = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        id: data.id,
+        name: data.name,
+      };
+    });
+
+    return friendList;
+  } catch (error) {
+    console.log(`Error friendList: ${error}`);
+  }
+};
+
+export const friendRequestList = async () => {
+  try {
+    const currentUser = auth.currentUser;
+    const getFriendRequestsQuery = query(
+      collection(firestore, `users/${currentUser?.uid}/friend_requests`),
+      where('status', '==', 'pending')
+    );
+    const querySnapshot = await getDocs(getFriendRequestsQuery);
+    const friendRequestList = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        id: data.id,
+        name: data.name,
+      };
+    });
+
+    return friendRequestList;
+  } catch (error) {
+    console.log(`Error friendRequestList: ${error}`);
+  }
+};
+
 export const sendFriendRequest = async (email: string) => {
   try {
     const currentUser = auth.currentUser;
@@ -37,7 +80,7 @@ export const sendFriendRequest = async (email: string) => {
       setDoc(
         doc(
           firestore,
-          `users/${requestedUser.uid}/contact_requests/${currentUser.uid}`
+          `users/${requestedUser.uid}/friend_requests/${currentUser.uid}`
         ),
         {
           id: currentUser.uid,
@@ -48,7 +91,7 @@ export const sendFriendRequest = async (email: string) => {
       );
     }
   } catch (error) {
-    console.log(`Error sendContactRequest: ${error}`);
+    console.log(`Error sendFriendRequest: ${error}`);
   }
 };
 
@@ -57,13 +100,13 @@ export const addFriend = async (uid: string) => {
     const currentUser = auth.currentUser;
     const docRef = doc(
       firestore,
-      `users/${currentUser?.uid}/contact_requests/${uid}`
+      `users/${currentUser?.uid}/friend_requests/${uid}`
     );
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const friend = docSnap.data();
       setDoc(
-        doc(firestore, `users/${currentUser?.uid}/contact_requests/${uid}`),
+        doc(firestore, `users/${currentUser?.uid}/friend_requests/${uid}`),
         {
           ...friend,
           status: 'accepted',
@@ -71,12 +114,12 @@ export const addFriend = async (uid: string) => {
         { merge: true }
       );
 
-      setDoc(doc(firestore, `users/${currentUser?.uid}/contacts/${uid}`), {
+      setDoc(doc(firestore, `users/${currentUser?.uid}/friends/${uid}`), {
         name: friend.name,
         id: friend.id,
       });
 
-      setDoc(doc(firestore, `users/${uid}/contacts/${currentUser?.uid}`), {
+      setDoc(doc(firestore, `users/${uid}/friends/${currentUser?.uid}`), {
         name: currentUser?.displayName,
         id: currentUser?.uid,
       });
@@ -93,13 +136,13 @@ export const declineFriend = async (uid: string) => {
     const currentUser = auth.currentUser;
     const docRef = doc(
       firestore,
-      `users/${currentUser?.uid}/contact_requests/${uid}`
+      `users/${currentUser?.uid}/friend_requests/${uid}`
     );
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const friend = docSnap.data();
       setDoc(
-        doc(firestore, `users/${currentUser?.uid}/contact_requests/${uid}`),
+        doc(firestore, `users/${currentUser?.uid}/friend_requests/${uid}`),
         {
           ...friend,
           status: 'decline',
