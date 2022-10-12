@@ -1,3 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.react-datepicker-wrapper {
+  height: 40px !important;
+  margin-top: 8px !important;
+  margin-bottom: 4px !important;
+}
+.react-datepicker__input-container {
+  height: 40px !important;
+}
+.react-datepicker__input-container input {
+  color: #9e9e9e !important;
+}
